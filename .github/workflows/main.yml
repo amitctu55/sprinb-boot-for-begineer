@@ -27,23 +27,23 @@ jobs:
           mvn clean
           mvn -B package --file pom.xml
           
-      - name: Build Docker Image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          dockerfile: Dockerfile
-          push: false
-          tags: ${{ secrets.amit395 }}/spring-boot-for-beginners:today
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.amit395 }}
-          password: ${{ secrets.dckr_pat_YvTkceouj0iy3C6bXC5-AU5PiC4 }}
+      # - name: Build Docker Image
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: .
+      #     dockerfile: Dockerfile
+      #     push: false
+      #     tags: ${{ secrets.amit395 }}/spring-boot-for-beginners:today
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v2
+      #   with:
+      #     username: ${{ secrets.amit395 }}
+      #     password: ${{ secrets.dckr_pat_YvTkceouj0iy3C6bXC5-AU5PiC4 }}
 
-      - name: Push to Docker Hub
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          dockerfile: Dockerfile
-          push: true
-          tags: ${{ secrets.amit395 }}/spring-boot-for-beginners:today
+      # - name: Push to Docker Hub
+      #   uses: docker/build-push-action@v2
+      #   with:
+      # #     context: 
+      #     dockerfile: Dockerfile
+      #     push: true
+      #     tags: ${{ secrets.amit395 }}/spring-boot-for-beginners:today

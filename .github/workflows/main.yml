@@ -27,20 +27,27 @@ jobs:
         run: |
           mvn clean
           mvn -B package --file pom.xml
+      - name: Set up Kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.amit395 }}
-          password: ${{ secrets.dckr_pat_o-ug4WblhQ8ikOfmw4GCAN1Vf5M }}
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
+      # - name: Log in to Docker Hub
+      #   uses: docker/login-action@v2
+      #   with:
+      #     username: ${{ secrets.amit395 }}
+      #     password: ${{ secrets.dckr_pat_o-ug4WblhQ8ikOfmw4GCAN1Vf5M }}
 
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          dockerfile: Dockerfile
-          push: true
-          tags: ${{ secrets.amit395 }}/spring-boot-for-beginners:latest
+      # - name: Build and Push Docker Image
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: .
+      #     dockerfile: Dockerfile
+      #     push: true
+      #     tags: ${{ secrets.amit395 }}/spring-boot-for-beginners:latest
 
 # name: Build & Deploy Spring app
 

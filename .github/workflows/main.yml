@@ -27,14 +27,14 @@ jobs:
         run: |
           mvn clean
           mvn -B package --file pom.xml
-      - name: Set up Kubeconfig
-        run: |
-          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+      # - name: Set up Kubeconfig
+      #   run: |
+      #     echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
 
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
+      # - name: Deploy to Kubernetes
+      #   run: |
+      #     kubectl apply -f k8s/deployment.yaml
+      #     kubectl apply -f k8s/service.yaml
       # - name: Log in to Docker Hub
       #   uses: docker/login-action@v2
       #   with:
